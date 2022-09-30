@@ -8,7 +8,7 @@ import sys
 import torch
 import subprocess
 
-# from stitchedImages import copyCapture, clear_images, stitching
+from stitchImages import start_stitch
 
 # clear_images(r'C:\Users\ASUS\Desktop\mdp\mdpv1_yolov5\runs\detect')
 # clear_images(r'C:\Users\ASUS\Desktop\mdp\mdpv1_yolov5\stitchedImages\rawCaptures')
@@ -19,23 +19,40 @@ print("Image server started")
 while True:
     rpi_name, image = image_hub.recv_image()
     print("received")
+    # change path to wherever imagezmq_images is + \image.jpg
     output_dir = r'C:\Users\ASUS\Desktop\mdp\mdpv1_yolov5\imagezmq_images\image.jpg' 
     cv2.imwrite(output_dir, image)
     print("Receiving image, sending to image processing...")
 
     print(f"Setup complete. Using torch {torch.__version__} ({torch.cuda.get_device_properties(0).name if torch.cuda.is_available() else 'CPU'})")
-    p = subprocess.getstatusoutput("python detect.py --weights best_299.pt --save-conf --img 640 --conf 0.2 --source ./imagezmq_images") 
+    p = subprocess.getstatusoutput("python detect.py --weights best_299.pt --save-conf --img 640 --conf 0.75 --source ./imagezmq_images") 
     output = p[1]
     with open('outputs/output_test.txt', 'w') as f:    # path to output .txt file
      f.write(output)
     message_dict = detection.process_output(path = "outputs/output_test.txt")
+    
 
-    message = detection.highest_conf(message_dict)[1]
+    message = None
+    if detection.highest_conf(message_dict):
+        message=detection.highest_conf(message_dict)[1]
+    else:
+        message=100
+    
+    
 
     message = str(message)
     print("message = ", message)
     message = message.encode('utf-8')
     image_hub.send_reply(message)
+    print(rpi_name)
+    if rpi_name == "end":
+        print("end")
+        break
+
+print("start stitch")
+start_stitch()
+
+    
 
 
 
