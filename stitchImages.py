@@ -89,6 +89,6 @@ def clear_runs():
   clearFolder(r'C:\Users\ASUS\Desktop\mdp\mdpv1_yolov5\runs\detect')
 
 
-clear_runs_rawCaptures()
+# clear_runs_rawCaptures()
 
 # start_stitch()
