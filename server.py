@@ -36,11 +36,8 @@ while True:
      f.write(output)
     message_dict = detection.process_output(path = "outputs/output.txt")
     
-    if message_dict:
-        if detection.highest_conf(message_dict):
-            message=detection.highest_conf(message_dict)[1]
-        else:
-            message=100
+    if detection.highest_conf(message_dict):
+        message=detection.highest_conf(message_dict)[1]
     else:
         message=100
 
