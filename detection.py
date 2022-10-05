@@ -14,7 +14,7 @@ print(f"Setup complete. Using torch {torch.__version__} ({torch.cuda.get_device_
 p = subprocess.getstatusoutput("python detect.py --weights best_v3.pt --img 640 --conf 0.6 --source ./imagezmq_images") 
 output = p[1]
 
-with open('outputs/output_test.txt', 'w') as f:    # path to output .txt file
+with open('outputs/output.txt', 'w') as f:    # path to output .txt file
   f.write(output)
 '''
 
@@ -50,16 +50,17 @@ def process_output(path = None, string = None):
     name = name[:-1] #remove : from image name
     # no classes detected
     #last word
-    if line_split[-1].endswith("ms"):
+    if line_split[-1] == "None":
       detections = None
     # classes detected
     else:
-      for e in line_split:
-        if e.endswith("ms"):
-          speed = e
       # from aft 640x480 to before speed
-      raw_classes = line_split[line_split.index("640x640")+1:line_split.index(speed)]
-      confidences = line_split[line_split.index(speed)+1:]
+      raw_classes_and_confidences = line_split[line_split.index("640x640")+1:]
+      classes = raw_classes_and_confidences[:int(len(raw_classes_and_confidences)/2)]
+      confidences = raw_classes_and_confidences[int(len(raw_classes_and_confidences)/2):]
+      # check if number of classes == number of confidences
+      assert(len(classes) == len(confidences))
+      '''
       #no. of classes detected in the pic
       class_num = [int(i) for i in raw_classes if not i.endswith(',')]
       #remove ',' only int
@@ -74,6 +75,10 @@ def process_output(path = None, string = None):
       for i in range(len(confidences)):
         #added
         detections.append([classes_with_duplicates[i], float(confidences[i])])
+      '''
+      detections = []
+      for i in range(len(classes)):
+        detections.append([int(classes[i]), float(confidences[i])])
     output[name] = detections
   # return output
   if len(output) != 0:

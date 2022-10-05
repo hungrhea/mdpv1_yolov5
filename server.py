@@ -30,11 +30,11 @@ while True:
     print("Receiving image, sending to image processing...")
     
     print(f"Setup complete. Using torch {torch.__version__} ({torch.cuda.get_device_properties(0).name if torch.cuda.is_available() else 'CPU'})")
-    p = subprocess.getstatusoutput("python detect.py --weights best_6223.pt --save-conf --img 640 --conf 0.75 --source ./imagezmq_images") 
+    p = subprocess.getstatusoutput("python detect.py --weights best_6223.pt --img 640 --conf 0.75 --source ./imagezmq_images") 
     output = p[1]
-    with open('outputs/output_test.txt', 'w') as f:    # path to output .txt file
+    with open('outputs/output.txt', 'w') as f:    # path to output .txt file
      f.write(output)
-    message_dict = detection.process_output(path = "outputs/output_test.txt")
+    message_dict = detection.process_output(path = "outputs/output.txt")
     
 
     message = None

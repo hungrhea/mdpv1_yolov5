@@ -148,16 +148,9 @@ def run(
                 det[:, :4] = scale_coords(im.shape[2:], det[:, :4], im0.shape).round()
 
                 # Print results
-                for c in det[:, -1].unique():
-                    n = (det[:, -1] == c).sum()  # detections per class
-                    print('!!!')
-                    print(names[int(c)])
-                    print('!!!')
-
-                    s += f"{n} {names[int(c)]}, "  # add to string
-                print('====')
-                print(s)
-                print('====')
+                # for c in det[:, -1].unique():
+                    # n = (det[:, -1] == c).sum()  # detections per class
+                    # s += f"{n} {names[int(c)]}, "  # add to string
 
                 # Write results
                 for *xyxy, conf, cls in reversed(det):
@@ -205,7 +198,16 @@ def run(
 
         # Print time (inference-only)
         # LOGGER.info(f"{s}{'' if len(det) else '(no detections), '}{dt[1].dt * 1E3:.1f}ms")
-        LOGGER.info(f"{s}{'' if len(det) else '(no detections), '}{dt[1].dt * 1E3:.1f}ms{' '+' '.join([str(det.numpy()[i][-2]) for i in range(len(det.numpy()))]) if len(det.numpy()) else ''}")
+        abc = ''
+        if len(det):
+            for i in range(len(det)):
+                abc += str(names[int(det.numpy()[i][-1])]) + ' '
+            LOGGER.info(f"{s}{abc}{' '.join([str(det.numpy()[i][-2]) for i in range(len(det.numpy()))]) if len(det.numpy()) else ''}")
+        else:
+            abc += 'None'
+            LOGGER.info(f"{s}{abc}")
+
+        # LOGGER.info(f"{s}{'' if len(det) else '(no detections), '}{dt[1].dt * 1E3:.1f}ms{' '+' '.join([str(det.numpy()[i][-2]) for i in range(len(det.numpy()))]) if len(det.numpy()) else ''}")
 
 
     # Print results
