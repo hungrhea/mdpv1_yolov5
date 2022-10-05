@@ -8,7 +8,7 @@ import sys
 import torch
 import subprocess
 
-from stitchImages import start_stitch
+from stitchImages import increment_path, start_stitch
 
 # clear_images(r'C:\Users\ASUS\Desktop\mdp\mdpv1_yolov5\runs\detect')
 # clear_images(r'C:\Users\ASUS\Desktop\mdp\mdpv1_yolov5\stitchedImages\rawCaptures')
@@ -19,8 +19,12 @@ print("Image server started")
 while True:
     rpi_name, image = image_hub.recv_image()
     print("received")
+
+    # imgrec not working
+    output_dir = increment_path(path='C:\Users\ASUS\Desktop\mdp\mdpv1_yolov5\imagezmq_images\image.jpg')
+
     # change path to wherever imagezmq_images is + \image.jpg
-    output_dir = r'C:\Users\ASUS\Desktop\mdp\mdpv1_yolov5\imagezmq_images\image.jpg' 
+    #output_dir = r'C:\Users\ASUS\Desktop\mdp\mdpv1_yolov5\imagezmq_images\image.jpg' 
     cv2.imwrite(output_dir, image)
     print("Receiving image, sending to image processing...")
 
