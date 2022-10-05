@@ -4,9 +4,9 @@ import shutil
 import os
 
 def stitching():
-  print("stitching")
+  print("stitching...")
   # replace with raw captures directory (under stitchedImages)
-  image_folder = r'C:\Users\zijia\OneDrive\Desktop\Git\mdpv1_yolov5\stitchedImages\rawCaptures'
+  image_folder = r'C:\Users\ASUS\Desktop\mdp\mdpv1_yolov5\stitchedImages\rawCaptures'
   imagePaths = list(paths.list_images(image_folder))
   images = [Image.open(x) for x in imagePaths]
   widths, heights = zip(*(i.size for i in images))
@@ -22,9 +22,10 @@ def stitching():
     x_offset += im.size[0]
 
   new_im.save('stitchedImages/stitchedOutput.png', format='png')
+  print("stitched all")
 
 def copyCapture():
-  print("copying captures")
+  print("copying captures...")
   # movdir should be the \runs\detect directory
   movdir = r"C:\Users\ASUS\Desktop\mdp\mdpv1_yolov5\runs\detect"
   #basedir should be the \stitchedImages\rawCaptures directory
@@ -51,6 +52,7 @@ def copyCapture():
               continue    # Next filename
           elif not os.path.exists(new_name):  # folder exists, file does not, just copy in
               shutil.copy(old_name, new_name)
+              print ("Copied", old_name, "as", new_name)
           else:  # folder exists, file exists as well
               while True:
                   new_name = os.path.join(basedir, base + "_" + str(ii) + extension)
@@ -59,7 +61,7 @@ def copyCapture():
                     print ("Copied", old_name, "as", new_name)
                     break 
               ii += 1
-  print("copied")
+  print("copied all")
 
 def clearFolder(folder):
   for filename in os.listdir(folder):
@@ -89,9 +91,7 @@ def clear_runs():
   clearFolder(r'C:\Users\ASUS\Desktop\mdp\mdpv1_yolov5\runs\detect')
 
 
-# clear_runs_rawCaptures()
 
-# start_stitch()
 
 # raw version of increment_path
 from pathlib import Path
@@ -124,3 +124,4 @@ def increment_path(
     else:
       print("returning path string: " , path)
       return str(path)
+
