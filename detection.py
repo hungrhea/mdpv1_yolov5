@@ -97,11 +97,15 @@ def highest_conf(message_dict):
     keys = message_dict.keys()
     # initialise image_name, detected_class and max_conf
     detected_class = None
+    print("message_dict= " , message_dict)
     for key in keys:
       if message_dict[key]:
         max_conf = message_dict[key][0][1]
+        print("max_conf = " , max_conf)
         image_name = key
+        print("image_name = ", image_name)
         detected_class = message_dict[key][0][0]
+        print("detected_class = ", detected_class)
     # no images contain a detection
     if detected_class == None:
       print("No detections found in images")
