@@ -92,3 +92,29 @@ def clear_runs():
 # clear_runs_rawCaptures()
 
 # start_stitch()
+
+# raw version of increment_path
+from pathlib import Path
+import os
+
+def increment_path(
+    path,           # path to increment (eg. "runs/detect/exp", "images/stitched.jpg")
+    exist_ok=False, # existing project/name ok, do not increment
+    sep='',         # (eg. "runs/detect/exp{sep}2", "images/stitched{sep}2.jpg")
+    mkdir=False     # create a new directory at the new incremented path
+):
+    # Increment file or directory path, i.e. runs/exp --> runs/exp{sep}2, runs/exp{sep}3, ... etc.
+    path = Path(path)  # os-agnostic
+    if path.exists() and not exist_ok:
+        path, suffix = (path.with_suffix(''), path.suffix) if path.is_file() else (path, '')
+
+        for n in range(2, 9999):
+            p = f'{path}{sep}{n}{suffix}'  # increment path
+            if not os.path.exists(p):  #
+                break
+        path = Path(p)
+
+    if mkdir:
+        path.mkdir(parents=True, exist_ok=True)  # make directory
+
+    return path
