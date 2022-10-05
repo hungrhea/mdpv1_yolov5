@@ -98,10 +98,11 @@ from pathlib import Path
 import os
 
 def increment_path(
-    path,           # path to increment (eg. "runs/detect/exp", "images/stitched.jpg")
-    exist_ok=False, # existing project/name ok, do not increment
-    sep='',         # (eg. "runs/detect/exp{sep}2", "images/stitched{sep}2.jpg")
-    mkdir=False     # create a new directory at the new incremented path
+    path,             # path to increment (eg. "runs/detect/exp", "images/stitched.jpg")
+    exist_ok=False,   # existing project/name ok, do not increment
+    sep='',           # (eg. "runs/detect/exp{sep}2", "images/stitched{sep}2.jpg")
+    mkdir=False,      # create a new directory at the new incremented path
+    return_path=False # returns type filename instead of type string
 ):
     # Increment file or directory path, i.e. runs/exp --> runs/exp{sep}2, runs/exp{sep}3, ... etc.
     path = Path(path)  # os-agnostic
@@ -117,6 +118,9 @@ def increment_path(
     if mkdir:
         path.mkdir(parents=True, exist_ok=True)  # make directory
     
-    print("returning path" , path)
-
-    return path
+    if return_path:
+      print("returning path directory: " , path)
+      return path
+    else:
+      print("returning path string: " , path)
+      return str(path)
