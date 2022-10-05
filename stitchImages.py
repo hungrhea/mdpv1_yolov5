@@ -6,7 +6,7 @@ import os
 def stitching():
   print("stitching")
   # replace with raw captures directory (under stitchedImages)
-  image_folder = r'C:\Users\ASUS\Desktop\mdp\mdpv1_yolov5\stitchedImages\rawCaptures'
+  image_folder = r'C:\Users\zijia\OneDrive\Desktop\Git\mdpv1_yolov5\stitchedImages\rawCaptures'
   imagePaths = list(paths.list_images(image_folder))
   images = [Image.open(x) for x in imagePaths]
   widths, heights = zip(*(i.size for i in images))
