@@ -21,7 +21,8 @@ while True:
     print("received")
 
     # imgrec not working
-    output_dir = increment_path(path=r'C:\Users\ASUS\Desktop\mdp\mdpv1_yolov5\imagezmq_images\image.jpg')
+    output_dir = r'C:\Users\ASUS\Desktop\mdp\mdpv1_yolov5\imagezmq_images\image.jpg' 
+    #output_dir = increment_path(path=r'C:\Users\ASUS\Desktop\mdp\mdpv1_yolov5\imagezmq_images\image.jpg')
 
     # change path to wherever imagezmq_images is + \image.jpg
     #output_dir = r'C:\Users\ASUS\Desktop\mdp\mdpv1_yolov5\imagezmq_images\image.jpg' 
@@ -35,14 +36,13 @@ while True:
      f.write(output)
     message_dict = detection.process_output(path = "outputs/output.txt")
     
-
-    message = None
-    if detection.highest_conf(message_dict):
-        message=detection.highest_conf(message_dict)[1]
+    if message_dict:
+        if detection.highest_conf(message_dict):
+            message=detection.highest_conf(message_dict)[1]
+        else:
+            message=100
     else:
         message=100
-    
-    
 
     message = str(message)
     print("message = ", message)
