@@ -116,5 +116,7 @@ def increment_path(
 
     if mkdir:
         path.mkdir(parents=True, exist_ok=True)  # make directory
+    
+    print("returning path" , path)
 
     return path

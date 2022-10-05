@@ -21,15 +21,16 @@ while True:
     print("received")
 
     # imgrec not working
-    output_dir = increment_path(path='C:\Users\ASUS\Desktop\mdp\mdpv1_yolov5\imagezmq_images\image.jpg')
+    output_dir = increment_path(path=r'C:\Users\ASUS\Desktop\mdp\mdpv1_yolov5\imagezmq_images\image.jpg')
+    output_dir = str(output_dir)
 
     # change path to wherever imagezmq_images is + \image.jpg
     #output_dir = r'C:\Users\ASUS\Desktop\mdp\mdpv1_yolov5\imagezmq_images\image.jpg' 
     cv2.imwrite(output_dir, image)
     print("Receiving image, sending to image processing...")
-    '''
+    
     print(f"Setup complete. Using torch {torch.__version__} ({torch.cuda.get_device_properties(0).name if torch.cuda.is_available() else 'CPU'})")
-    p = subprocess.getstatusoutput("python detect.py --weights best_299.pt --save-conf --img 640 --conf 0.75 --source ./imagezmq_images") 
+    p = subprocess.getstatusoutput("python detect.py --weights best_6223.pt --save-conf --img 640 --conf 0.75 --source ./imagezmq_images") 
     output = p[1]
     with open('outputs/output_test.txt', 'w') as f:    # path to output .txt file
      f.write(output)
@@ -56,7 +57,7 @@ while True:
 print("start stitch")
 start_stitch()
 
-     '''
+     
 
 
 
