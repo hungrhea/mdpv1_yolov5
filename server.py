@@ -22,7 +22,6 @@ while True:
 
     # imgrec not working
     output_dir = increment_path(path=r'C:\Users\ASUS\Desktop\mdp\mdpv1_yolov5\imagezmq_images\image.jpg')
-    output_dir = str(output_dir)
 
     # change path to wherever imagezmq_images is + \image.jpg
     #output_dir = r'C:\Users\ASUS\Desktop\mdp\mdpv1_yolov5\imagezmq_images\image.jpg' 
