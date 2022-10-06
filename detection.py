@@ -78,7 +78,8 @@ def process_output(path = None, string = None):
       '''
       detections = []
       for i in range(len(classes)):
-        detections.append([int(classes[i]), float(confidences[i])])
+        if int(classes[i]) != 10:
+          detections.append([int(classes[i]), float(confidences[i])])
     output[name] = detections
   # return output
   if len(output) != 0:
