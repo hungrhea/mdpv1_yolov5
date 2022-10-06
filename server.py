@@ -34,8 +34,8 @@ while True:
      f.write(output)
     message_dict = detection.process_output(path = "outputs/output.txt")
     
-    if detection.highest_conf(message_dict):
-        message=detection.highest_conf(message_dict)[1]
+    if detection.biggest_area(message_dict):
+        message=detection.biggest_area(message_dict)[1]
     else:
         message=100
 
