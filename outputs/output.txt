@@ -3,7 +3,7 @@ YOLOv5  v6.2-118-gad37f04 Python-3.10.6 torch-1.12.1+cpu CPU
 
 Fusing layers... 
 Model summary: 157 layers, 7093732 parameters, 0 gradients, 16.0 GFLOPs
-image 1/1 C:\Users\ASUS\Desktop\mdp\mdpv1_yolov5\imagezmq_images\image.jpg: 640x640 19 0.9164072
+image 1/1 C:\Users\ASUS\Documents\GitHub\mdpv1_yolov5\imagezmq_images\image.jpg: 640x640 19 0.9164072
 Speed: 2.0ms pre-process, 330.2ms inference, 1.0ms NMS per image at shape (1, 3, 640, 640)
 Results saved to [1mruns\detect\exp14[0m
-[31m[1mrequirements:[0m C:\Users\ASUS\Desktop\mdp\mdpv1_yolov5\requirements.txt not found, check failed.
+[31m[1mrequirements:[0m C:\Users\ASUS\Documents\GitHub\mdpv1_yolov5\requirements.txt not found, check failed.

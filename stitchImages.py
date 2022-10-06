@@ -6,7 +6,7 @@ import os
 def stitching():
   print("stitching...")
   # replace with raw captures directory (under stitchedImages)
-  image_folder = r'C:\Users\ASUS\Desktop\mdp\mdpv1_yolov5\stitchedImages\rawCaptures'
+  image_folder = r'C:\Users\ASUS\Documents\GitHub\mdpv1_yolov5\stitchedImages\rawCaptures'
   imagePaths = list(paths.list_images(image_folder))
   images = [Image.open(x) for x in imagePaths]
   widths, heights = zip(*(i.size for i in images))
@@ -27,9 +27,9 @@ def stitching():
 def copyCapture():
   print("copying captures...")
   # movdir should be the \runs\detect directory
-  movdir = r"C:\Users\ASUS\Desktop\mdp\mdpv1_yolov5\runs\detect"
+  movdir = r"C:\Users\ASUS\Documents\GitHub\mdpv1_yolov5\runs\detect"
   #basedir should be the \stitchedImages\rawCaptures directory
-  basedir = r"C:\Users\ASUS\Desktop\mdp\mdpv1_yolov5\stitchedImages\rawCaptures"
+  basedir = r"C:\Users\ASUS\Documents\GitHub\mdpv1_yolov5\stitchedImages\rawCaptures"
 
   # Walk through all files in the directory that contains the files to copy
   ii = 2
@@ -37,14 +37,14 @@ def copyCapture():
       for filename in files:
           # absolute path
           old_name = os.path.join( os.path.abspath(root), filename )
-          #C:\Users\ASUS\Desktop\mdp\mdpv1_yolov5\runs\detect\exp\image.jpg
+          #C:\Users\ASUS\Documents\GitHub\mdpv1_yolov5\runs\detect\exp\image.jpg
 
           # Separate base from extension
           base, extension = os.path.splitext(filename)
 
           # Initial new name
           new_name = os.path.join(basedir, filename)
-          #C:\Users\ASUS\Desktop\mdp\mdpv1_yolov5\stitchedImages\rawCaptures\image.jpg
+          #C:\Users\ASUS\Documents\GitHub\mdpv1_yolov5\stitchedImages\rawCaptures\image.jpg
 
           # If folder basedir/base does not exist
           if not os.path.exists(basedir):
@@ -80,15 +80,15 @@ def start_stitch():
 
 #clear runs\detect and stitchedImages\rawCaptures
 def clear_runs_rawCaptures():
-  clearFolder(r'C:\Users\ASUS\Desktop\mdp\mdpv1_yolov5\stitchedImages\rawCaptures')
-  clearFolder(r'C:\Users\ASUS\Desktop\mdp\mdpv1_yolov5\runs\detect')
+  clearFolder(r'C:\Users\ASUS\Documents\GitHub\mdpv1_yolov5\stitchedImages\rawCaptures')
+  clearFolder(r'C:\Users\ASUS\Documents\GitHub\mdpv1_yolov5\runs\detect')
 
 #below 2 wont rlly be used, can just use the function above to clear both folders
 def clear_rawCaptures():
-  clearFolder(r'C:\Users\ASUS\Desktop\mdp\mdpv1_yolov5\stitchedImages\rawCaptures')
+  clearFolder(r'C:\Users\ASUS\Documents\GitHub\mdpv1_yolov5\stitchedImages\rawCaptures')
 
 def clear_runs():
-  clearFolder(r'C:\Users\ASUS\Desktop\mdp\mdpv1_yolov5\runs\detect')
+  clearFolder(r'C:\Users\ASUS\Documents\GitHub\mdpv1_yolov5\runs\detect')
 
 
 
