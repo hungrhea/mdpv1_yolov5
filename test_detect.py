@@ -7,6 +7,7 @@ p = subprocess.getstatusoutput("python detect.py --weights best_6223.pt --img 64
 output = p[1]
 with open('outputs/output_dummy.txt', 'w') as f:    # path to output .txt file
     f.write(output)
+'''
 message_dict = detection.process_output(path = "outputs/output_dummy.txt")
 
 print(message_dict)
@@ -20,4 +21,4 @@ else:
 
 message = str(message)
 print("message = ", message)
-
+'''

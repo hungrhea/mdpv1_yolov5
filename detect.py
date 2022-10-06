@@ -200,12 +200,20 @@ def run(
         # LOGGER.info(f"{s}{'' if len(det) else '(no detections), '}{dt[1].dt * 1E3:.1f}ms")
         abc = ''
         if len(det):
-            for i in range(len(det)):
+            # append classes
+            for i in range(len(det.numpy())):
                 abc += str(names[int(det.numpy()[i][-1])]) + ' '
-            LOGGER.info(f"{s}{abc}{' '.join([str(det.numpy()[i][-2]) for i in range(len(det.numpy()))]) if len(det.numpy()) else ''}")
+            # append confidences
+            for i in range(len(det.numpy())):
+                abc += str(det.numpy()[i][-2]) + ' '
+            # append x1y1x2y2
+            for i in range(len(det.numpy())):
+                abc += str(det.numpy()[i][-6]) + ' ' + str(det.numpy()[i][-5]) + ' ' + str(det.numpy()[i][-4]) + ' ' + str(det.numpy()[i][-3]) + ' '
+            #LOGGER.info(f"{s}{abc}{' '.join([str(det.numpy()[i][-2]) for i in range(len(det.numpy()))]) if len(det.numpy()) else ''}")
         else:
             abc += 'None'
-            LOGGER.info(f"{s}{abc}")
+        
+        LOGGER.info(f"{s}{abc}")
 
         # LOGGER.info(f"{s}{'' if len(det) else '(no detections), '}{dt[1].dt * 1E3:.1f}ms{' '+' '.join([str(det.numpy()[i][-2]) for i in range(len(det.numpy()))]) if len(det.numpy()) else ''}")
 
