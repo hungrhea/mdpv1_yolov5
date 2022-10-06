@@ -56,7 +56,7 @@ def process_output(path = None, string = None, area_limit = 3600):
     # classes detected
     else:
       # from aft 640x480 to before speed
-      raw_results = line_split[line_split.index("640x640")+1:]
+      raw_results = line_split[line_split.index("1280x1280")+1:]
       # check if everything is there
       assert(len(raw_results) % 6 == 0)
       # segment raw_results
