@@ -86,8 +86,10 @@ def process_output(path = None, string = None, area_limit = 3600):
           # check bounding box area
           width = abs(float(coordinates[i][0]) - float(coordinates[i][2]))
           height = abs(float(coordinates[i][1]) - float(coordinates[i][3]))
-          if width*height > area_limit:
-            detections.append([int(classes[i]), float(confidences[i])])
+          area = width * height
+          if area > area_limit:
+            # append [class, confidence, bounding box area]
+            detections.append([int(classes[i]), float(confidences[i]), area])
       if len(detections) == 0:
         detections = None
     output[name] = detections
@@ -128,6 +130,37 @@ def highest_conf(message_dict):
         for detection in message_dict[key]:
           if detection[1] > max_conf:
             max_conf = detection[1]
+            image_name = key
+            detected_class = detection[0]
+    
+    return (image_name, detected_class)
+  print("No images in detection")
+  return None
+
+
+
+
+# returns tuple (image_name, detected_class)
+def biggest_area(message_dict):
+  if message_dict:
+    keys = message_dict.keys()
+    # initialise image_name, detected_class and max_area
+    detected_class = None
+    for key in keys:
+      if message_dict[key]:
+        max_area = message_dict[key][0][2]
+        image_name = key
+        detected_class = message_dict[key][0][0]
+    # no images contain a detection
+    if detected_class == None:
+      print("No detections found in images")
+      return None
+
+    for key in keys:
+      if message_dict[key]:
+        for detection in message_dict[key]:
+          if detection[2] > max_area:
+            max_area = detection[2]
             image_name = key
             detected_class = detection[0]
     
