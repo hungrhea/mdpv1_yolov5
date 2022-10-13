@@ -90,7 +90,44 @@ def clear_rawCaptures():
 def clear_runs():
   clearFolder(r'C:\Users\ASUS\Documents\GitHub\mdpv1_yolov5\runs\detect')
 
+def saveImages():
+  print("saving images...")
+  # movdir should be the \runs\detect directory
+  movdir = r"C:\Users\ASUS\Documents\GitHub\mdpv1_yolov5\runs\detect"
+  #basedir should be the \stitchedImages\rawCaptures directory
+  basedir = r"C:\Users\ASUS\Desktop\mdp photos\SAVED_PICS"
 
+  # Walk through all files in the directory that contains the files to copy
+  ii = 2
+  for root, dirs, files in os.walk(movdir):
+      for filename in files:
+          # absolute path
+          old_name = os.path.join( os.path.abspath(root), filename )
+          #C:\Users\ASUS\Documents\GitHub\mdpv1_yolov5\runs\detect\exp\image.jpg
+
+          # Separate base from extension
+          base, extension = os.path.splitext(filename)
+
+          # Initial new name
+          new_name = os.path.join(basedir, filename)
+          #C:\Users\ASUS\Documents\GitHub\mdpv1_yolov5\stitchedImages\rawCaptures\image.jpg
+
+          # If folder basedir/base does not exist
+          if not os.path.exists(basedir):
+              print (basedir, "not found" )
+              continue    # Next filename
+          elif not os.path.exists(new_name):  # folder exists, file does not, just copy in
+              shutil.copy(old_name, new_name)
+              print ("Copied", old_name, "as", new_name)
+          else:  # folder exists, file exists as well
+              while True:
+                  new_name = os.path.join(basedir, base + "_" + str(ii) + extension)
+                  if not os.path.exists(new_name):
+                    shutil.copy(old_name, new_name)
+                    print ("Copied", old_name, "as", new_name)
+                    break 
+              ii += 1
+  print("saved images")
 
 
 # raw version of increment_path
@@ -124,4 +161,5 @@ def increment_path(
     else:
       print("returning path string: " , path)
       return str(path)
+
 
