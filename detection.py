@@ -55,16 +55,14 @@ def process_output(path = None, string = None, area_limit = 0):
       detections = None
     # classes detected
     else:
-      # from aft 640x480 to before speed
-      raw_results = line_split[line_split.index("640x640")+1:]
-      print("raw results:" , raw_results)
+      # from aft 646x480 to before speed
+      raw_results = line_split[line_split.index("256x416")+1:]
 
       # check if everything is there
       assert(len(raw_results) % 6 == 0)
       # segment raw_results
       num = int(len(raw_results) / 6)
       classes = raw_results[:num]
-      print("classes:", classes)
 
       confidences = raw_results[num:int(num*2)]
       coordinates = np.array_split(raw_results[int(num*2):], num)
@@ -94,7 +92,6 @@ def process_output(path = None, string = None, area_limit = 0):
           if area > area_limit:
             # append [class, confidence, bounding box area]
             detections.append([int(classes[i]), float(confidences[i]), area])
-        print(detections)
       if len(detections) == 0:
         detections = None
     output[name] = detections

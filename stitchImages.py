@@ -52,13 +52,13 @@ def copyCapture():
               continue    # Next filename
           elif not os.path.exists(new_name):  # folder exists, file does not, just copy in
               shutil.copy(old_name, new_name)
-              print ("Copied", old_name, "as", new_name)
+              #print ("Copied", old_name, "as", new_name)
           else:  # folder exists, file exists as well
               while True:
                   new_name = os.path.join(basedir, base + "_" + str(ii) + extension)
                   if not os.path.exists(new_name):
                     shutil.copy(old_name, new_name)
-                    print ("Copied", old_name, "as", new_name)
+                   # print ("Copied", old_name, "as", new_name)
                     break 
               ii += 1
   print("copied all")
