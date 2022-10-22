@@ -1,9 +1,9 @@
 [34m[1mdetect: [0mweights=['best_task2_v2.pt'], source=./imagezmq_images, data=data\coco128.yaml, imgsz=[416, 416], conf_thres=0.72, iou_thres=0.45, max_det=1000, device=, view_img=False, save_txt=False, save_conf=False, save_crop=False, nosave=False, classes=None, agnostic_nms=False, augment=False, visualize=False, update=False, project=runs\detect, name=exp, exist_ok=False, line_thickness=3, hide_labels=False, hide_conf=False, half=False, dnn=False, vid_stride=1
 [31m[1mrequirements:[0m C:\Users\ASUS\Documents\GitHub\mdpv1_yolov5\requirements.txt not found, check failed.
-YOLOv5  v6.2-131-g143760e Python-3.10.6 torch-1.12.1+cpu CPU
+YOLOv5  v6.2-132-gca386dd Python-3.10.6 torch-1.12.1+cpu CPU
 
 Fusing layers... 
 Model summary: 157 layers, 7018216 parameters, 0 gradients, 15.8 GFLOPs
-image 1/1 C:\Users\ASUS\Documents\GitHub\mdpv1_yolov5\imagezmq_images\image.jpg: 256x416 38 0.9562479 460.0 264.0 479.0 283.0 
-Speed: 1.0ms pre-process, 182.5ms inference, 2.0ms NMS per image at shape (1, 3, 416, 416)
+image 1/1 C:\Users\ASUS\Documents\GitHub\mdpv1_yolov5\imagezmq_images\image.jpg: 256x416 38 0.79115325 155.0 276.0 182.0 302.0 
+Speed: 0.0ms pre-process, 107.8ms inference, 6.3ms NMS per image at shape (1, 3, 416, 416)
 Results saved to [1mruns\detect\exp2[0m
